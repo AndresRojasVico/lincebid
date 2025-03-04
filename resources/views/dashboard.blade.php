@@ -11,6 +11,7 @@
                 <div class="p-6 text-gray-900">
                     {{ __("You're logged in!") }}
                     <h3>hola mundo</h3>
+                    <H4>esto es desde el equipo b</H4>
                 </div>
             </div>
         </div>
