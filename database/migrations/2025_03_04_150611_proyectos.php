@@ -16,7 +16,7 @@ return new class extends Migration
 
         DB::statement("
            CREATE TABLE proyectos(
-           id INT AUTO_INCREMENT PRIMARY KEY,
+           id INT unique  primary key ,
            link_licitacion VARCHAR(255),
            fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
            vigente_anulada_archivada VARCHAR(100),
