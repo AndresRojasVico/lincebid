@@ -48,7 +48,9 @@ return new class extends Migration
            subcontratacion_porcentaje DECIMAL(5,2),
            estado_nuestro_id INT,
            usuario_id INT,
-           notas TEXT
+           notas TEXT,
+           CONSTRAINT fk_proyectos_estados_proyectos FOREIGN KEY (estado_nuestro_id) REFERENCES estados_proyectos(id),
+           CONSTRAINT fk_proyectos_usuarios FOREIGN KEY (usuario_id) REFERENCES users(id)
             );
         ");
     }
