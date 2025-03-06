@@ -47,7 +47,7 @@ return new class extends Migration
            subcontratacion_permitido BOOLEAN,
            subcontratacion_porcentaje DECIMAL(5,2),
            estado_nuestro_id INT,
-           usuario_id INT,
+           usuario_id INT (11),
            notas TEXT,
            CONSTRAINT pk_proyectos PRIMARY KEY (id),
            FOREIGN KEY (estado_nuestro_id) REFERENCES estados_proyectos(id),
