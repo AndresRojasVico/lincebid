@@ -16,7 +16,7 @@ return new class extends Migration
 
         DB::statement("
            CREATE TABLE proyectos(
-           id INT unique  primary key ,
+           id INT (11) AUTO_INCREMENT,
            link_licitacion VARCHAR(255),
            fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
            vigente_anulada_archivada VARCHAR(100),
@@ -49,8 +49,9 @@ return new class extends Migration
            estado_nuestro_id INT,
            usuario_id INT,
            notas TEXT,
-           CONSTRAINT fk_proyectos_estados_proyectos FOREIGN KEY (estado_nuestro_id) REFERENCES estados_proyectos(id),
-           CONSTRAINT fk_proyectos_usuarios FOREIGN KEY (usuario_id) REFERENCES users(id)
+           CONSTRAINT pk_proyectos PRIMARY KEY (id),
+           FOREIGN KEY (estado_nuestro_id) REFERENCES estados_proyectos(id),
+           FOREIGN KEY (usuario_id) REFERENCES users(id)
             );
         ");
     }
