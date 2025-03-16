@@ -49,9 +49,7 @@ return new class extends Migration
            estado_nuestro_id INT,
            usuario_id INT (11),
            notas TEXT,
-           CONSTRAINT pk_proyectos PRIMARY KEY (id),
-           FOREIGN KEY (estado_nuestro_id) REFERENCES estados_proyectos(id),
-           FOREIGN KEY (usuario_id) REFERENCES users(id)
+           CONSTRAINT pk_proyectos PRIMARY KEY (id)
             );
         ");
     }
