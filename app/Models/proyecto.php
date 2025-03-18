@@ -9,22 +9,11 @@ class proyecto extends Model
     //
     protected $table = 'proyectos';
 
-    //relacion con estados estados proyectos  relacion de uno a muchos 
-    //proque cada proyecto puede tener muchos estasdos a la vez pero un estado puede estar aplicado a muchos proyectos 
-
-    public function estado()
+    //relacion proyectos con proyectos_usuarios
+    //un proyecto puede se utilizado por muchos proyectos_usuarios y un proyecto_usuario solo puede utilizar un proyecto a la vez
+    //tipo de realion: 1:M - 1:1  de uno a muchos  
+    public function proyecto_usuario()
     {
-        return $this->belongsTo('App\Models\estado_proyecto', 'estado_id');
+        return $this->hasMany('App\Models\proyecto_usuario');
     }
-
-
-
-    //relacion de proyectos con usuarios un usuario puede tener muchos proyectos y un proyecto puede ser gestionado por mucho usuarios
-    // relacno de muchos a muchos M:N
-
-
-    //ralacion con tareas
-
-
-
 }

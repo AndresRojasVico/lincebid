@@ -45,4 +45,22 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+
+
+    //relacion de usuarios con proyectos_usuarios
+    //un usuario puede tener muchos proyectos_usuarios y un proyecto_usuario solo puede ser utilizado por un usuario
+    //relacion 1:M-1:1 de uno a muchos
+    public function proyectos()
+    {
+        return $this->hasMany('App\Models\proyecto');
+    }
+
+    //relacion de usuarios con tareas
+    //un usuario puede tener muchas tareas y una tarea puede ser creada por un usuario
+    //relacion 1:M-1:1 de uno a muchos
+    public function tareas()
+    {
+        return $this->hasMany('App\Models\tarea');
+    }
 }
