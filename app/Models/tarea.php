@@ -22,7 +22,7 @@ class tarea extends Model
     //relacion 1:1-1:M de muchos a uno
     public function estado_tarea()
     {
-        return $this->belongsTo('App\Models\estado_tarea', 'estado_tarea_id');
+        return $this->belongsTo('App\Models\estado_tarea', 'estado_id');
     }
 
     //relacion de tareas con usuarios
@@ -30,6 +30,6 @@ class tarea extends Model
     //relacion 1:1-1:M de muchos a uno
     public function usuario()
     {
-        return $this->belongsTo('App\Models\usuario', 'asignado_a_id');
+        return $this->belongsTo('App\Models\User', 'asignado_a_id');
     }
 }

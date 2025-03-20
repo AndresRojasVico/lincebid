@@ -31,7 +31,7 @@ class proyecto_usuario extends Model
     //tipo de relacion: 1:1-1:M muchos a uno 
     public function usuario()
     {
-        return $this->belongsTo('App\Models\usuario', 'usuario_id');
+        return $this->belongsTo('App\Models\User', 'usuario_id');
     }
 
     //relacion de proyectos_usuarios con tareas

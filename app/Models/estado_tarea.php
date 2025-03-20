@@ -12,7 +12,7 @@ class estado_tarea extends Model
     //relacion de estados_tareas con tareas
     //un estado_tarea puede ser utilizado por muchas tareas y una tarea puede tener un estado_tarea a la vez
     //relacion 1:M-1:1 de uno a muchos
-    public function tareas()
+    public function tarea()
     {
         return $this->hasMany('App\Models\tarea');
     }

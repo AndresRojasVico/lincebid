@@ -51,9 +51,9 @@ class User extends Authenticatable
     //relacion de usuarios con proyectos_usuarios
     //un usuario puede tener muchos proyectos_usuarios y un proyecto_usuario solo puede ser utilizado por un usuario
     //relacion 1:M-1:1 de uno a muchos
-    public function proyectos()
+    public function proyectos_usuarios()
     {
-        return $this->hasMany('App\Models\proyecto');
+        return $this->hasMany('App\Models\proyecto_usuario');
     }
 
     //relacion de usuarios con tareas
