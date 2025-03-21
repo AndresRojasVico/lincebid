@@ -6,13 +6,10 @@ use App\Models\proyecto_usuario;
 
 
 Route::get('/', function () {
+    /*  
     $proyectos_usuarios = proyecto_usuario::all();
-
-
-
     foreach ($proyectos_usuarios as $proyecto_usuario) {
         echo  "nombre de proyecto: " .  $proyecto_usuario->nombre . '<br>';
-
         echo "el usuario que lo ha creado es :" . $proyecto_usuario->usuario->name . '<br>';
         echo "Numero de espediete:" . $proyecto_usuario->proyecto->numero_expediente . '<br>';
         echo "Tateas pendientes : <br>";
@@ -23,8 +20,11 @@ Route::get('/', function () {
         echo '<hr>';
     }
     die();
+    */
     return view('welcome');
 });
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
