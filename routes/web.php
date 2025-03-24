@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Models\proyecto_usuario;
 
@@ -25,6 +26,9 @@ Route::get('/', function () {
 });
 
 
+Route::get('/user/config', [UserController::class, 'config'])->name('user.config');
+
+Route::post('/user/update', [UserController::class, 'update'])->name('user.update');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
