@@ -26,9 +26,16 @@ Route::get('/', function () {
 });
 
 
-Route::get('/user/config', [UserController::class, 'config'])->name('user.config');
-
+Route::get('/user/config', [UserController::class, 'config'])->middleware('auth')->name('user.config');
 Route::post('/user/update', [UserController::class, 'update'])->name('user.update');
+Route::get('/user/image/{filename}', [UserController::class, 'getImage'])->name('user.image');
+
+
+Route::get('/user/admin', function () {
+    return view('user.useradmin');
+})->middleware('auth', 'admin')->name('user.admin');
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

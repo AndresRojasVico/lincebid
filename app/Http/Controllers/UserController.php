@@ -5,9 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+
+use Illuminate\Routing\Controller;
 
 class UserController extends Controller
 {
+    //restringir acceso a usuarios no autenticados
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     use ValidatesRequests;
     //
 
@@ -35,8 +47,28 @@ class UserController extends Controller
         $user->name = $name;
         $user->surname = $surname;
         $user->email = $email;
+
+        $image_path = $request->file('image_path');
+        //si existe la imagen
+        if ($image_path) {
+            //Poner nombre unico
+            $image_path_name = time() . $image_path->getClientOriginalName();
+            //Guardar imagen en la carpeta storage (storage/app/users)
+            Storage::disk('users')->put($image_path_name, File::get($image_path));
+            //Seteo el nombre de la imagen en el objeto
+            $user->image = $image_path_name;
+
+            //pendiente de trabajar con la imagen como optimizarla en tamaña y peso y eliminar la imagen anterior
+        }
+
         //Ejecutar consulta y cambios en la base de datos
-        $user->save();
-        return redirect()->route('config')->with(['message' => 'Usuario actualizado correctamente']);
+        $user->update();
+        return redirect()->route('user.config')->with(['message' => 'Usuario actualizado correctamente']);
+    }
+
+    public function getImage($filename)
+    {
+        $file = Storage::disk('users')->get($filename);
+        return new Response($file, 200);
     }
 }

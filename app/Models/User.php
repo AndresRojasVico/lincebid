@@ -65,4 +65,10 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\tarea');
     }
+
+    // Método para verificar si el usuario es administrador
+    public function isAdmin(): bool
+    {
+        return $this->rol === 'admin';
+    }
 }
