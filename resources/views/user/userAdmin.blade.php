@@ -14,7 +14,7 @@
 
                     <br><br>
                     <!-- filepath: /resources/views/atom/upload.blade.php -->
-                    <form action="{{ route('aton.upload.post') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('user.upload.post') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <input type="file" name="atom_file" required>
                         <button type="submit">Upload ATOM</button>

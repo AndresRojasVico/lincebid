@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AtonController;
 use Illuminate\Support\Facades\Route;
 use App\Models\proyecto_usuario;
 
@@ -35,7 +36,7 @@ Route::get('/user/admin', function () {
     return view('user.useradmin');
 })->middleware('auth', 'rol')->name('user.admin');
 
-Route::post('/aton/upload', [UserController::class, 'upload'])->name('user.upload.post');
+Route::post('/aton/upload', [AtonController::class, 'upload'])->name('user.upload.post');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
