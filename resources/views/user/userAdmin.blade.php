@@ -7,9 +7,18 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
+                    Hola {{ Auth::user()->name }}, bienvenido a la zona de administrador de LinceBid. Aquí puedes gestionar los usuarios y las ofertas de la plataforma.
+                    <br><br>
 
+                    <a href="https://www.hacienda.gob.es/es-ES/GobiernoAbierto/Datos%20Abiertos/Paginas/LicitacionesContratante.aspx">Ministerio de acienda</a>
 
-
+                    <br><br>
+                    <!-- filepath: /resources/views/atom/upload.blade.php -->
+                    <form action="{{ route('aton.upload.post') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <input type="file" name="atom_file" required>
+                        <button type="submit">Upload ATOM</button>
+                    </form>
                 </div>
             </div>
         </div>

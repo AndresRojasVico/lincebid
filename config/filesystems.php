@@ -68,6 +68,11 @@ return [
             'throw' => false,
             'report' => false,
         ],
+        'atoms' => [
+            'driver' => 'local',
+            'root' => storage_path('app/atoms'),
+            'url' => env('APP_URL') . '/storage',
+        ],
 
     ],
 

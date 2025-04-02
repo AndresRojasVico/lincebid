@@ -33,9 +33,9 @@ Route::get('/user/image/{filename}', [UserController::class, 'getImage'])->name(
 
 Route::get('/user/admin', function () {
     return view('user.useradmin');
-})->middleware('auth', 'admin')->name('user.admin');
+})->middleware('auth', 'rol')->name('user.admin');
 
-
+Route::post('/aton/upload', [UserController::class, 'upload'])->name('user.upload.post');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
