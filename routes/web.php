@@ -32,6 +32,11 @@ Route::post('/user/update', [UserController::class, 'update'])->name('user.updat
 Route::get('/user/image/{filename}', [UserController::class, 'getImage'])->name('user.image');
 
 
+Route::get('/proyectos', [AtonController::class, 'loadConten'])->middleware('auth')->name('proyectos');
+
+
+
+
 Route::get('/user/admin', function () {
     return view('user.useradmin');
 })->middleware('auth', 'rol')->name('user.admin');

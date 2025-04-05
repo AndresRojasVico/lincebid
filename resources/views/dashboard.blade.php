@@ -17,6 +17,9 @@
                     @else
                     <h3>User</h3>
                     @endif
+                    <br>
+                    <a href="{{ route('proyectos') }}">Buscar proyectos nuevos</a>
+
 
 
 
