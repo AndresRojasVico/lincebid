@@ -33,6 +33,7 @@ Route::get('/user/image/{filename}', [UserController::class, 'getImage'])->name(
 
 
 Route::get('/proyectos', [AtonController::class, 'loadConten'])->middleware('auth')->name('proyectos');
+Route::get('/proyectosUrl', [AtonController::class, 'loadContenUrl'])->middleware('auth')->name('proyectosUrl');
 
 
 

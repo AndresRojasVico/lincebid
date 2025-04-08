@@ -19,6 +19,9 @@
                     @endif
                     <br>
                     <a href="{{ route('proyectos') }}">Buscar proyectos nuevos</a>
+                    <br>
+                    <a href="{{ route ('proyectosUrl')}}">Proyecto desde url aton de hacienda</a>
+
 
 
 

@@ -8,6 +8,67 @@ use Illuminate\Support\Facades\Storage;
 class AtonController extends Controller
 {
     //
+    public function loadContenUrl()
+    {
+
+
+        $url = "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3.atom"; // URL del XML
+        $xml = simplexml_load_file($url);
+
+        if ($xml === false) {
+            die("Error cargando XML");
+        } else {
+            echo "cargado";
+        }
+
+        $data = [];
+        $contador = 0;
+
+
+
+        foreach ($xml->entry as $entry) {
+            $contador++;
+            // Obtener los espacios de nombres
+            $namespaces = $entry->getNamespaces(true);
+
+            $contractFolderID = $entry->children($namespaces['cac-place-ext'])->ContractFolderStatus->children($namespaces['cbc'])->ContractFolderID;
+            //ver linea 107 del xml en esa linea esta el dato del impote
+
+            $importe = $entry->children($namespaces['cac-place-ext'])->ContractFolderStatus->children($namespaces['cac'])->ProcurementProject->children($namespaces['cac'])->BudgetAmount->children($namespaces['cbc'])->TaxExclusiveAmount;
+            //recorro los codigos de la entrada y los meto en un array
+            $codes = [];
+            $co = $entry->children($namespaces['cac-place-ext'])->ContractFolderStatus->children($namespaces['cac'])->ProcurementProject->children($namespaces['cac'])->RequiredCommodityClassification;
+            foreach ($co as $code) {
+                $codes[] = (string) $code->children($namespaces['cbc'])->ItemClassificationCode;
+            }
+
+            //filtrar por codigos 
+            $codigos = [];
+
+            foreach ($codes as $code) {
+
+
+                $data[] = [
+                    'fecha_update' => (string) $xml->updated,
+                    'id' => (string) $entry->id,
+                    'link' => (string) $entry->link['href'],
+                    'summary' => (string) $entry->summary,
+                    'title' => (string) $entry->title,
+                    'updated' => (string) $entry->updated,
+                    'ContractFolderID' => $contractFolderID,
+                    'importe' => $importe,
+                    'codigos' => $codes,
+                    'contador' => $contador,
+                ];
+            }
+        }
+
+
+        // Retornar la vista con los datos procesados
+        return view('proyectos.proyectosUrl', compact('data'));
+    }
+
+
 
 
     public function upload(Request $request)
