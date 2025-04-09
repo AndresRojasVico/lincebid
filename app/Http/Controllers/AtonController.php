@@ -42,12 +42,22 @@ class AtonController extends Controller
                 $codes[] = (string) $code->children($namespaces['cbc'])->ItemClassificationCode;
             }
 
-            //filtrar por codigos 
-            $codigos = [];
 
+           
+
+            //filtrar por codigos 
+            $impresoras=[];
+            $portatiles= []; 
+            $desarrollo= [72000000,72100000];
+            $diseñoWeb=[72413000, 72413000,72414000,72415000,72416000,72417000,72420000,72421000,72422000];
+               // uno todos los arrays que me interesan en uno solo llamado codigos usando la funcion array_merge
+            $codigos= array_merge($impresoras, $portatiles,$desarrollo, $diseñoWeb);
+
+            
+           
             foreach ($codes as $code) {
 
-
+              if(in_array($code, $codigos)){
                 $data[] = [
                     'fecha_update' => (string) $xml->updated,
                     'id' => (string) $entry->id,
@@ -60,6 +70,8 @@ class AtonController extends Controller
                     'codigos' => $codes,
                     'contador' => $contador,
                 ];
+              }
+                
             }
         }
 
@@ -199,7 +211,16 @@ class AtonController extends Controller
                 }
 
                 //filtrar por codigos 
-                $codigos = ['45000000', '45233000', '35613000', '452152120', '45000000'];
+                 $impresoras=[];
+                 $portatiles= []; 
+                 $desarrollo= [72000000,72100000];
+                 $diseñoWeb=[72413000, 72413000,72414000,72415000,72416000,72417000,72420000,72421000,72422000];
+                    // uno todos los arrays que me interesan en uno solo llamado codigos usando la funcion array_merge
+                 $codigos= array_merge($impresoras, $portatiles,$desarrollo, $diseñoWeb);
+
+                 var_dump($codigos);
+                 die();
+                
                 foreach ($codes as $code) {
 
                     //filtrado  de codigos con el array codigos
