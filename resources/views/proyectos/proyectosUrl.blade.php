@@ -45,7 +45,10 @@
                                     @endforeach
 
                                 </td>
-                                <td><button type="button" class="btn btn-success">Ver</button> <button type="button" class="btn btn-danger">Eliminar</button></td>
+                                <td>
+                                    <a href=" {{ route }}">Ver</a>
+                                    <button type="button" class="btn btn-danger">Eliminar</button>
+                                </td>
                             </tr>
 
                             @endforeach
