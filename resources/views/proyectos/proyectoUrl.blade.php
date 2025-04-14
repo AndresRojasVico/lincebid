@@ -1,1 +1,1 @@
-esto son los datos del proyecto
+<h1>esto es la vista de proyecto </h1>

@@ -31,12 +31,13 @@ Route::get('/user/config', [UserController::class, 'config'])->middleware('auth'
 Route::post('/user/update', [UserController::class, 'update'])->name('user.update');
 Route::get('/user/image/{filename}', [UserController::class, 'getImage'])->name('user.image');
 
-
-Route::get('/proyectos', [AtonController::class, 'loadConten'])->middleware('auth')->name('proyectos');
+/* PROYECTOS */ 
 Route::get('/proyectosUrl', [AtonController::class, 'loadContenUrl'])->middleware('auth')->name('proyectosUrl');
+Route::get('/proyectos', [AtonController::class, 'loadConten'])->middleware('auth')->name('proyectos');
 
+/* PROYECTO */
 Route::get('/proyectoUrl', function () {
-
+   
     return view('proyectos.proyectoUrl')->name('proyectoUrl');
 });
 

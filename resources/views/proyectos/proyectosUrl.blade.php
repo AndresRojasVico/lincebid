@@ -46,7 +46,7 @@
 
                                 </td>
                                 <td>
-                                    <a href=" {{ route }}">Ver</a>
+                                    <a href=" {{ route('proyectoUrl') }}">Ver</a>
                                     <button type="button" class="btn btn-danger">Eliminar</button>
                                 </td>
                             </tr>
