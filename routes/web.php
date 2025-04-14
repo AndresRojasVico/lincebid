@@ -36,10 +36,7 @@ Route::get('/proyectosUrl', [AtonController::class, 'loadContenUrl'])->middlewar
 Route::get('/proyectos', [AtonController::class, 'loadConten'])->middleware('auth')->name('proyectos');
 
 /* PROYECTO */
-Route::get('/proyectoUrl', function () {
-   
-    return view('proyectos.proyectoUrl')->name('proyectoUrl');
-});
+Route::get('/proyectoUrl', );
 
 
 Route::get('/user/admin', function () {
