@@ -46,8 +46,8 @@
 
                                 </td>
                                 <td>
-                                    <a href=" {{ route }}">Ver</a>
-                                    <button type="button" class="btn btn-danger">Eliminar</button>
+                                    <a href=" {{ route('proyectoUrl',compact('data') }}">Ver</a>
+
                                 </td>
                             </tr>
 

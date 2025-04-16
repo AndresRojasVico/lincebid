@@ -35,10 +35,12 @@ Route::get('/user/image/{filename}', [UserController::class, 'getImage'])->name(
 Route::get('/proyectos', [AtonController::class, 'loadConten'])->middleware('auth')->name('proyectos');
 Route::get('/proyectosUrl', [AtonController::class, 'loadContenUrl'])->middleware('auth')->name('proyectosUrl');
 
-Route::get('/proyectoUrl', function () {
-
-    return view('proyectos.proyectoUrl')->name('proyectoUrl');
-});
+Route::get('/proyectoUrl/{data}', function ($data) {
+    $data = json_decode($data, true);
+    var_dump($data);
+    die();
+    return view('proyectos.proyectoUrl', ['data' => $data]);
+})->name('proyectoUrl');
 
 
 Route::get('/user/admin', function () {
