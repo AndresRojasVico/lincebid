@@ -46,7 +46,7 @@
 
                                 </td>
                                 <td>
-                                    <a href=" {{ route('proyectoUrl',compact('data') }}">Ver</a>
+                                    <a href=" {{ route('proyectoUrl',['data'=>$entry['summary']]) }}">Ver</a>
 
                                 </td>
                             </tr>

@@ -8,6 +8,7 @@ class proyecto extends Model
 {
     //
     protected $table = 'proyectos';
+    public $timestamps = false;
 
     //relacion proyectos con proyectos_usuarios
     //un proyecto puede se utilizado por muchos proyectos_usuarios y un proyecto_usuario solo puede utilizar un proyecto a la vez

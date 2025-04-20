@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900">
                     <h2>Esto es la vista del proyecto en particular</h2>
 
-                    
+                    <p>dato recevido : {{$data}}</p>
 
                 </div>
             </div>

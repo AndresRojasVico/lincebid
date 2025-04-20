@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+use App\Models\Proyecto;
+use DateTime;
+
 class AtonController extends Controller
 {
     //
@@ -102,6 +105,8 @@ class AtonController extends Controller
         return view('dashboard');
     }
 
+
+
     public function loadConten()
     // Esta funcion se encarga de cargar el contenido xml del fichero atons 
     {
@@ -119,12 +124,13 @@ class AtonController extends Controller
             $data = [];
             $contador = 0;
             foreach ($xml->entry as $entry) {
-                $contador++;
+
                 // Obtener los espacios de nombres
                 $namespaces = $entry->getNamespaces(true);
 
                 // Obtener los datos de la entrada
-
+                //sumario
+                $summary = $entry->summary;
                 //identificador
                 $identificador = $entry->id;
                 preg_match('/(\d+)$/', $identificador, $matches);
@@ -132,7 +138,9 @@ class AtonController extends Controller
                 //link
                 $link = $entry->link['href'];
                 // fecha de actualizacion
-                $fecha_update = $entry->updated;
+                //$fecha_update =  $entry->updated;// Fecha original
+                $fecha_update = (new DateTime($entry->updated))->format('Y-m-d H:i:s'); // Convertir al formato 'YYYY-MM-DD HH:MM:SS'
+
                 //vigente/anulada/archivada   
                 //Primera publicación
                 //Estado	  --PRE=ANUNCIO PREVIO -- PUB=EN PLAZO -- EV=PENDIENTE DE ADJUDICACION -- ADJ=ADJUDICADA -- RES=RESUELTA -- ANU=ANULADA -- ARC=ARCHIVADA
@@ -190,11 +198,6 @@ class AtonController extends Controller
                 //Descripción de la financiación europea	
                 //Subcontratación permitida	
                 //Subcontratación permitida porcentaje
-
-
-
-
-
                 //importe
                 $importe = $entry->children($namespaces['cac-place-ext'])->ContractFolderStatus->children($namespaces['cac'])->ProcurementProject->children($namespaces['cac'])->BudgetAmount->children($namespaces['cbc'])->TaxExclusiveAmount;
                 //recorro los codigos de la entrada y los meto en un array
@@ -212,33 +215,60 @@ class AtonController extends Controller
                 // uno todos los arrays que me interesan en uno solo llamado codigos usando la funcion array_merge
                 $codigos = array_merge($impresoras, $portatiles, $desarrollo, $diseñoWeb);
 
-                var_dump($codigos);
-                die();
+
 
                 foreach ($codes as $code) {
 
                     //filtrado  de codigos con el array codigos
                     if (in_array($code, $codigos)) {
                         $data[] = [
-                            'fecha_update' => (string) $xml->updated,
-                            'id' => (string) $entry->id,
-                            'link' => (string) $entry->link['href'],
-                            'summary' => (string) $entry->summary,
-                            'title' => (string) $entry->title,
-                            'updated' => (string) $entry->updated,
-                            'ContractFolderID' => $contractFolderID,
-                            'importe' => $importe,
-                            'codigos' => $codes,
-                            'contador' => $contador
+                            'id' => (string) $contractFolderID,
+                            'link' => (string) $link,
+                            'summary' => (string) $summary,
+                            'fecha_actualizacion' => $fecha_update,
+                            'vigente_anulada_archivada' => "desconocido",
+                            'estado' => (string) $estado,
+                            'importe' => (string) $importe,
                         ];
                     }
                 }
+            } // Close the foreach loop que recorre todas las entradas 
+            //GUARDO EN LA BASE DE DATS 
+            $proyecto = new Proyecto();
+            foreach ($data as $proyec) {
+                // Verificar si el registro ya existe en la base de datos
+                $proyectoExistente = Proyecto::find($proyec['id']); // Busca por la clave primaria (id)
+
+                if (!$proyectoExistente) {
+                    // Si no existe, crea un nuevo registro
+                    $proyecto = new Proyecto();
+                    $proyecto->id = $proyec['id'];
+                    $proyecto->link_licitacion = $proyec['link'];
+                    $proyecto->summary = $proyec['summary'];
+                    $proyecto->fecha_actualizacion = $proyec['fecha_actualizacion'];
+                    $proyecto->vigente_anulada_archivada = $proyec['vigente_anulada_archivada'];
+                    $proyecto->estado = $proyec['estado'];
+                    $proyecto->presupuesto_sin_impuestos = $proyec['importe'];
+
+                    // Guardar el nuevo registro
+
+                    ($proyecto);
+                    $proyecto->save();
+
+                    // Imprimir en pantalla para probar
+                    echo "Nuevo registro guardado:<br>";
+                    echo "id: " . $proyecto->id . '<br>';
+                    echo "link: " . $proyecto->link_licitacion . '<br>';
+                    echo "summary: " . $proyecto->summary . '<br>';
+                    echo "fecha de actualizacion: " . $proyecto->fecha_actualizacion . '<br>';
+                    echo "vigente/anulada/archivada: " . $proyecto->vigente_anulada_archivada . '<br>';
+                    echo "estado: " . $proyecto->estado . '<br>';
+                    echo '<hr>';
+                }
             }
 
-
-            // Retornar la vista con los datos procesados
-            return view('proyectos.proyectos', compact('data'));
-        } else {
+            return view('dashboard', ['message' => 'Datos guardados correctamente']);
+        } else { // end comprobar si existe el archivo
             return response()->json(['message' => 'Archivo no encontrado'], 404);
         }
     }

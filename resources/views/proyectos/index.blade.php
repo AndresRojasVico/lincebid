@@ -7,42 +7,41 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    <h2>Listado de proyecto para buscar</h2>
-                    @if(empty($data))
-                    <p>No hay proyectos disponibles para buscar.</p>
-                    @else
-                    <h3>Fecha de actualizacion: {{$data[0]['fecha_update']}}</h3>
+                    <h2>Proyectos</h2>
 
+
+                    @if(empty($proyectos))
+                    <p>No hay proyectos disponibles.</p>
+                    @else
+
+
+                    Ultima actualizacion: <br>
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
 
-                                <th scope="col">Contador</th>
+                                <th scope="col">id</th>
+                                <th scope="col">fecha de actualizacion </th>
                                 <th scope="col">Sumario</th>
-                                <th scope="col">Titulo</th>
-                                <th scope="col">ContractFolderStatus</th>
                                 <th scope="col">Importe</th>
-                                <th scope="col">Codigos</th>
                                 <th scope="col">Acciones</th>
+
 
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($data as $entry)
+                            @foreach($proyectos as $entry)
                             <tr>
-                                <td>{{ $entry['contador'] }}</td>
+                                <td>{{ gettype($entry['id'])  }}</td>
+                                <td>{{ $entry['fecha_actualizacion'] }}</td>
                                 <td>{{ $entry['summary'] }}</td>
-                                <td><a href="{{ $entry['link'] }}">{{ $entry['title'] }}</a></td>
-                                <td> {{$entry['ContractFolderID']}}</td>
-                                <td> {{$entry['importe']}}€</td>
+                                <td>{{ $entry['presupuesto_sin_impuestos']}}</td>
                                 <td>
-                                    @foreach($entry['codigos'] as $codigo)
-                                    {{$codigo}}
-                                    @endforeach
-
+                                    <a href=" {{ route('proyecto.detalle', ['id'=> $entry['id']]) }} " type="button" class="btn btn-danger">ver</a>
+                                    <button type="button" class="btn btn-danger">Eliminar</button>
                                 </td>
-                                <td><button type="button" class="btn btn-success">Ver</button> <button type="button" class="btn btn-danger">Eliminar</button></td>
                             </tr>
+
 
                             @endforeach
                         </tbody>
