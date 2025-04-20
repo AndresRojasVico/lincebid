@@ -8,6 +8,12 @@ class proyecto extends Model
 {
     //
     protected $table = 'proyectos';
+    //me sarguro de que el dato de la vase de dato sea un string
+    protected $casts = [
+        'id' => 'string',
+    ];
+
+
     public $timestamps = false;
 
     //relacion proyectos con proyectos_usuarios

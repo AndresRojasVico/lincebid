@@ -32,7 +32,7 @@
                         <tbody>
                             @foreach($proyectos as $entry)
                             <tr>
-                                <td>{{ gettype($entry['id'])  }}</td>
+                                <td>{{ $entry['id'] }}</td>
                                 <td>{{ $entry['fecha_actualizacion'] }}</td>
                                 <td>{{ $entry['summary'] }}</td>
                                 <td>{{ $entry['presupuesto_sin_impuestos']}}</td>

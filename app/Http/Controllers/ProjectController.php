@@ -13,8 +13,7 @@ class ProjectController extends Controller
 
 
         $proyectos = Proyecto::orderBy('fecha_actualizacion', 'desc')->get();
-        echo "el tipo de dato es :" . $proyectos[0]->id  . gettype($proyectos[0]->id);
-        die();
+
         return view('proyectos.index', ['proyectos' => $proyectos]);
     }
 
