@@ -1,6 +1,20 @@
-@if(empty($proyecto))
-<p>No hay proyectos disponibles.</p>
-@else
-<h2>Detalles del proyecto</h2>
-Ultima actualizacion: {{ $proyecto['id'] }} <br>
-@endif
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Detalles del proyecto </h2>
+    </x-slot>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+
+                    @if(empty($proyecto))
+                    <p>No hay proyectos disponibles.</p>
+                    @else
+                    <h2>Detalles del proyecto</h2>
+                    El id del proyecto es : {{ $proyecto['id'] }} <br>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>

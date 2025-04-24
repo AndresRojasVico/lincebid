@@ -19,8 +19,6 @@
                         <input type="file" name="atom_file" required>
                         <button class="btn btn-success" type="submit">Subir archivo</button>
                     </form>
-                    <br>
-                    <a type="button" class="btn btn-success" href=" {{route('loadConten')}}">Actualizar registros en la base de datos </a>
 
                 </div>
             </div>

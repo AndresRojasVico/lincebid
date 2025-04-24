@@ -17,11 +17,10 @@ class ProjectController extends Controller
         return view('proyectos.index', ['proyectos' => $proyectos]);
     }
 
-    public function show($id)
+    public function show(Request $request)
     {
-
-
-        $proyecto = Proyecto::findOrFail("001/2024/4881_V3");
+        $id = urldecode($request->query('id'));
+        $proyecto = Proyecto::findOrFail($id);
         return view('proyectos.detalle', compact('proyecto'));
     }
 }

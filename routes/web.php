@@ -7,9 +7,12 @@ use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 use App\Models\proyecto_usuario;
 
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Route::get('/seachProyect', [ProjectController::class, 'index'])->middleware('auth')->name('proyectos.index');
-Route::get('/proyecto/{id}', [ProjectController::class, 'show'])->middleware('auth')->name('proyecto.detalle');
+Route::get('/proyecto/{id?}', [ProjectController::class, 'show'])->middleware('auth')->name('proyecto.detalle');
 
 Route::get('/user/config', [UserController::class, 'config'])->middleware('auth')->name('user.config');
 Route::post('/user/update', [UserController::class, 'update'])->name('user.update');

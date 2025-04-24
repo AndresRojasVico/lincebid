@@ -15,13 +15,12 @@
                     @else
 
 
-                    Ultima actualizacion: <br>
+                    Ultima actualizacion:{{ $proyectos[0]->fecha_actualizacion }} <br>
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
 
                                 <th scope="col">id</th>
-                                <th scope="col">fecha de actualizacion </th>
                                 <th scope="col">Sumario</th>
                                 <th scope="col">Importe</th>
                                 <th scope="col">Acciones</th>
@@ -33,12 +32,12 @@
                             @foreach($proyectos as $entry)
                             <tr>
                                 <td>{{ $entry['id'] }}</td>
-                                <td>{{ $entry['fecha_actualizacion'] }}</td>
+
                                 <td>{{ $entry['summary'] }}</td>
                                 <td>{{ $entry['presupuesto_sin_impuestos']}}</td>
                                 <td>
-                                    <a href=" {{ route('proyecto.detalle', ['id'=> $entry['id']]) }} " type="button" class="btn btn-danger">ver</a>
-                                    <button type="button" class="btn btn-danger">Eliminar</button>
+                                    <a href="{{ route('proyecto.detalle') }}?id={{ urlencode($entry['id']) }}" class="btn btn-warning">Ver</a>
+
                                 </td>
                             </tr>
 

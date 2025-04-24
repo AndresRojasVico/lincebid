@@ -102,7 +102,8 @@ class AtonController extends Controller
         // Opcional: Obtener la URL del archivo guardado (si es un disco público)
         $fileUrl = Storage::disk('public')->url('atoms/' . $fileName);
         //etiqueta de los codigos ContractFolderStatus -> ProcurementProject  -> RequiredCommodityClassification
-        return view('dashboard');
+        //return view('user.userAdmin');
+        return redirect()->route('loadConten');
     }
 
 
@@ -208,12 +209,13 @@ class AtonController extends Controller
                 }
 
                 //filtrar por codigos 
+                $repavimentos = [45233223];
                 $impresoras = [];
                 $portatiles = [];
                 $desarrollo = [72000000, 72100000];
                 $diseñoWeb = [72413000, 72413000, 72414000, 72415000, 72416000, 72417000, 72420000, 72421000, 72422000];
                 // uno todos los arrays que me interesan en uno solo llamado codigos usando la funcion array_merge
-                $codigos = array_merge($impresoras, $portatiles, $desarrollo, $diseñoWeb);
+                $codigos = array_merge($impresoras, $portatiles, $desarrollo, $diseñoWeb, $repavimentos);
 
 
 
