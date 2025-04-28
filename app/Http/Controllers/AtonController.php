@@ -175,6 +175,7 @@ class AtonController extends Controller
                 //Número de expediente
                 $contractFolderID = $entry->children($namespaces['cac-place-ext'])->ContractFolderStatus->children($namespaces['cbc'])->ContractFolderID;
                 //Objeto del Contrato
+                $objetoContrato = $entry->children($namespaces['cac-place-ext'])->ContractFolderStatus->children($namespaces['cac'])->ProcurementProject->children($namespaces['cbc'])->Name;
                 //Valor estimado del contrato	
                 //Presupuesto base sin impuestos	
                 //Presupuesto base con impuestos	
@@ -182,6 +183,8 @@ class AtonController extends Controller
                 //Tipo de contrato	
                 //Lugar de ejecución	
                 //Órgano de Contratación	
+                $organoContratacion = $entry->children($namespaces['cac-place-ext'])->ContractFolderStatus->children($namespaces['cac-place-ext'])->LocatedContractingParty->children($namespaces['cac'])->Party->children($namespaces['cac'])->PartyName->children($namespaces['cbc'])->Name;
+
                 //ID OC en PLACSP	
                 //NIF OC	
                 //DIR3	
@@ -191,6 +194,9 @@ class AtonController extends Controller
                 //Tipo de procedimiento	
                 //Sistema de contratación	
                 //Tramitación	
+                //Fecha de publicacion
+                $fechaPuplicacion = $entry->children($namespaces['cac-place-ext'])->ContractFolderStatus->children($namespaces['cac-place-ext'])->ValidNoticeInfo->children($namespaces['cac-place-ext'])->AdditionalPublicationStatus->children($namespaces['cac-place-ext'])->AdditionalPublicationDocumentReference->children($namespaces['cbc'])->IssueDate;
+
                 //Forma de presentación de la oferta	
                 //Fecha de presentación de ofertas	
                 //Fecha de presentación de solicitudes de participacion	
@@ -210,12 +216,15 @@ class AtonController extends Controller
 
                 //filtrar por codigos 
                 $repavimentos = [45233223];
-                $impresoras = [];
-                $portatiles = [];
+
+                //MAQUINAS, EQUIPOS Y ARTICULOS DE OFICINA Y DE INFORMATICA,EXCEPTO MUEBLES Y PAQUETES DE SOFWARE 
+                $equipos = [30000000, 30100000, 30110000, 30111000, 30120000, 30121000, 30121100, 30121200, 30121300, 30121400, 30121410, 30121420, 30121430, 30122000, 30122100, 3012220030123000, 30123100, 30123200, 30123300, 30123400, 30123500, 30123600, 30123610, 30123620, 30123630, 30124000, 30124100, 30124110, 30124120, 30124130, 30124140, 30124150, 30124200, 30124300, 30124300];
+                //accesorios para escaner y impresoras
+                $impresoras = [30124500, 30124510, 30124520, 30124530, 30125000, 30125100, 30125110, 30125120, 30125130, 30130000];
                 $desarrollo = [72000000, 72100000];
                 $diseñoWeb = [72413000, 72413000, 72414000, 72415000, 72416000, 72417000, 72420000, 72421000, 72422000];
                 // uno todos los arrays que me interesan en uno solo llamado codigos usando la funcion array_merge
-                $codigos = array_merge($impresoras, $portatiles, $desarrollo, $diseñoWeb, $repavimentos);
+                $codigos = array_merge($impresoras, $equipos, $desarrollo, $diseñoWeb, $repavimentos);
 
 
 
@@ -228,9 +237,12 @@ class AtonController extends Controller
                             'link' => (string) $link,
                             'summary' => (string) $summary,
                             'fecha_actualizacion' => $fecha_update,
+                            'fecha_puplicacion' => $fechaPuplicacion,
                             'vigente_anulada_archivada' => "desconocido",
                             'estado' => (string) $estado,
                             'importe' => (string) $importe,
+                            'organo_contratacion' => (string) $organoContratacion,
+                            'objeto_contrato' => (string) $objetoContrato,
                         ];
                     }
                 }
@@ -248,24 +260,17 @@ class AtonController extends Controller
                     $proyecto->link_licitacion = $proyec['link'];
                     $proyecto->summary = $proyec['summary'];
                     $proyecto->fecha_actualizacion = $proyec['fecha_actualizacion'];
+                    $proyecto->fecha_publicacion  = $proyec['fecha_puplicacion'];
                     $proyecto->vigente_anulada_archivada = $proyec['vigente_anulada_archivada'];
                     $proyecto->estado = $proyec['estado'];
                     $proyecto->presupuesto_sin_impuestos = $proyec['importe'];
+                    $proyecto->organo_contratacion = $proyec['organo_contratacion'];
+                    $proyecto->objeto_contrato = $proyec['objeto_contrato'];
 
                     // Guardar el nuevo registro
 
                     ($proyecto);
                     $proyecto->save();
-
-                    // Imprimir en pantalla para probar
-                    echo "Nuevo registro guardado:<br>";
-                    echo "id: " . $proyecto->id . '<br>';
-                    echo "link: " . $proyecto->link_licitacion . '<br>';
-                    echo "summary: " . $proyecto->summary . '<br>';
-                    echo "fecha de actualizacion: " . $proyecto->fecha_actualizacion . '<br>';
-                    echo "vigente/anulada/archivada: " . $proyecto->vigente_anulada_archivada . '<br>';
-                    echo "estado: " . $proyecto->estado . '<br>';
-                    echo '<hr>';
                 }
             }
 

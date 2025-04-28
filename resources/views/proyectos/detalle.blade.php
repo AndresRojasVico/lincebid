@@ -11,7 +11,12 @@
                     <p>No hay proyectos disponibles.</p>
                     @else
                     <h2>Detalles del proyecto</h2>
-                    El id del proyecto es : {{ $proyecto['id'] }} <br>
+                    Id: {{ $proyecto['id'] }} <br>
+                    <p>Organo de contratacion: {{ $proyecto['organo_contratacion']}} </p>
+                    <a href="{{ $proyecto['link_licitacion']}}">Link</a>
+                    <br>
+                    <p>Fecha de publicacion: {{ date('d-m-Y', strtotime($proyecto['fecha_publicacion'])) }}</p>
+
                     @endif
                 </div>
             </div>
