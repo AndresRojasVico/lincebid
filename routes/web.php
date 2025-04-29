@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AtonController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ProyectoUsuarioController;
 use Illuminate\Support\Facades\Route;
 use App\Models\proyecto_usuario;
 
@@ -31,7 +32,8 @@ Route::get('/proyectoUrl/{data}', function ($data) {
 })->name('proyectoUrl');
 
 
-
+//proyecto_usuario
+Route::get('/proyecto_usuario/{id?}', [ProyectoUsuarioController::class, 'newProyecto'])->name('proyecto_usuario.new');
 
 Route::post('/aton/upload', [AtonController::class, 'upload'])->name('user.upload.post');
 

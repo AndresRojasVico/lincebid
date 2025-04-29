@@ -7,11 +7,20 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
+                    @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                    @endif
+
                     <h2>Proyectos</h2>
 
 
-                    @if(empty($proyectos))
+                    @if($proyectos->isEmpty())
                     <p>No hay proyectos disponibles.</p>
+                    <br>
+                    Es necesario actualizar la base de datos, por favor, dirijase a la seccion de administracion y actualice la base de datos. <br>
+                    <a href="{{ route('user.admin') }}">Zona de administrador</a>
                     @else
 
 
