@@ -25,8 +25,10 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
-                <x-nav-link :href="route('profile.edit')">
-                    {{ __('Proyectos ()') }}
+                <x-nav-link :href="route('proyecto_usuario.index')">
+                    {{ __('Proyectos:  ') }}
+                    {{ Auth::user()->proyectos_usuarios->count() }}
+
                 </x-nav-link>
                 <x-nav-link :href="route('profile.edit')">
                     {{ __('Tareas ()') }}

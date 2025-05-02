@@ -8,10 +8,18 @@ use App\Models\Proyecto;
 // Ensure the ProyectoUsuario model exists in this namespace
 use App\Models\Proyecto_usuario;
 
+
 class ProyectoUsuarioController extends Controller
 {
     //
 
+
+    public function index()
+    {
+        $misProyectos = Proyecto_usuario::where('usuario_id', auth()->user()->id)->get();
+
+        return view('proyectosUsuarios.index', ['misProyectos' => $misProyectos]);
+    }
     public function newProyecto(Request $request)
     {
         $id = urldecode($request->query('id'));

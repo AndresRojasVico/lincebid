@@ -55,7 +55,8 @@ class User extends Authenticatable
     //relacion 1:M-1:1 de uno a muchos
     public function proyectos_usuarios()
     {
-        return $this->hasMany('App\Models\proyecto_usuario');
+        //return $this->hasMany('App\Models\proyecto_usuario');
+        return $this->hasMany(Proyecto_usuario::class, 'usuario_id'); // Asegúrate de usar la columna correcta
     }
 
     //relacion de usuarios con tareas
