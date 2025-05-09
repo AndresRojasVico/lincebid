@@ -224,7 +224,6 @@ class AtonController extends Controller
                    // 30100000-Máquinas, equipo y artículos de oficina, excepto ordenadores, impresoras y mobiliario.
                       // 30110000-Máquinas de tratamiento de textos.
                            // 30111000-Procesadores de texto.
-                              //30111000-Procesadores de texto.
                            // 30120000-Fotocopiadoras, máquinas offset e impresoras.
                               //30121000-Fotocopiadoras y aparatos termocopiadores.
                                    // 30121100-Fotocopiadoras.
@@ -241,14 +240,26 @@ class AtonController extends Controller
                            // 30170000-Etiquetadoras.
                            // 30180000-Máquinas de escribir y endosar cheques.
                            // 30190000-Equipo y artículos de oficina diversos.
+                      // 30120000-Fotocopiadoras, máquinas offset e impresoras.  
 
-                      // 30120000-Fotocopiadoras, máquinas offset e impresoras.
-                      
+                   // 30200000-Equipo y material informático.++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                     // 30210000-Máquinas procesadoras de datos (hardware).
+
+                       //30211000-Ordenador «mainframe».
+                         // 30211100-Superordenador.
+                         // 30211200-Equipo informático de unidad central.
+                         // 30211300-Plataformas informáticas.
+                         // 30211400-Configuraciones informáticas.
+                         // 30211500-Unidad central de procesamiento (CPU) o procesadores.
+                       
+                       //30212000-Equipo informático para miniordenadores.
+                         //30212100-Unidades centrales de proceso para miniordenadores.
 
 
-               
 
+                     // 30220000-Equipo de cartografía digital.
 
+                     // 30230000-Equipo relacionado con la informática.
 
                 $equipos = [30000000, 30100000, 30110000, 30111000, 30120000, 30121000, 30121100, 30121200, 30121300, 30121400, 30121410, 30121420, 30121430, 30122000, 30122100, 3012220030123000, 30123100, 30123200, 30123300, 30123400, 30123500, 30123600, 30123610, 30123620, 30123630, 30124000, 30124100, 30124110, 30124120, 30124130, 30124140, 30124150, 30124200, 30124300, 30124300];
                 //************REVISADO*/
@@ -318,6 +329,7 @@ class AtonController extends Controller
 
                     ($proyecto);
                     $proyecto->save();
+                    //esto es una marca
                 }
             }
 
