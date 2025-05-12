@@ -340,7 +340,7 @@ class AtonController extends Controller
 
                     // Guardar el nuevo registro
                     $proyecto->save();
-                    //esto es una marca
+                    //esto es una marca que quiero que se vea en el equipo a 
                 }
                 echo "el organo de contratacion :" . $proyecto->organo_contratacion . "La fecha de publicacion es:" . $proyecto->fecha_publicacion . "<br>";
             }

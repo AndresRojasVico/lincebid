@@ -12,7 +12,9 @@ class ProjectController extends Controller
     {
 
 
-        $proyectos = Proyecto::orderBy('fecha_actualizacion', 'desc')->get();
+        $proyectos = Proyecto::where('estado', 'EN PLAZO')
+            ->orderBy('fecha_publicacion', 'desc')
+            ->get();
 
         return view('proyectos.index', ['proyectos' => $proyectos]);
     }
