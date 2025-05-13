@@ -215,7 +215,17 @@ class AtonController extends Controller
                 // $fechapresentacion =  ;
 
 
-                //Fecha de presentación de ofertas	
+                //Fecha de presentación de ofertas
+                $fechaMaximaPresentacion = $entry->children($namespaces['cac-place-ext'])
+                    ?->ContractFolderStatus
+                    ?->children($namespaces['cac-place-ext'])
+                    ?->ValidNoticeInfo
+                    ?->children($namespaces['cac-place-ext'])
+                    ?->AdditionalPublicationStatus
+                    ?->children($namespaces['cac-place-ext'])
+                    ?->AdditionalPublicationDocumentReference
+                    ?->children($namespaces['cbc'])
+                    ?->LastResponseDate;
                 //Fecha de presentación de solicitudes de participacion	
                 //Directiva de aplicación	
                 //Financiación Europea y fuente	
