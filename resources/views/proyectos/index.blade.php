@@ -28,6 +28,7 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
+                                <th scope="col">ID</th>
                                 <th scope="col">Organo de contratacion</th>
                                 <th scope="col">Fecha de publicacio</th>
                                 <th scope="col">Estado</th>
@@ -43,6 +44,7 @@
                         <tbody>
                             @foreach($proyectos as $entry)
                             <tr>
+                                <td>{{ $entry['id'] }}</td>
                                 <td>{{ $entry['organo_contratacion'] }}</td>
                                 <td>{{date('d-m-Y', strtotime($entry['fecha_publicacion']))}}</td>
                                 <td>{{ $entry['estado'] }}</td>
