@@ -200,32 +200,23 @@ class AtonController extends Controller
                 //Sistema de contratación	
                 //Tramitación	
                 //Fecha de publicacion
-                $fechaPuplicacion = $entry->children($namespaces['cac-place-ext'])
-                    ?->ContractFolderStatus
-                    ?->children($namespaces['cac-place-ext'])
-                    ?->ValidNoticeInfo
-                    ?->children($namespaces['cac-place-ext'])
-                    ?->AdditionalPublicationStatus
-                    ?->children($namespaces['cac-place-ext'])
-                    ?->AdditionalPublicationDocumentReference
-                    ?->children($namespaces['cbc'])
-                    ?->IssueDate;
+                $fechaPuplicacion = $entry
+                    ->children($namespaces['cac-place-ext'])?->ContractFolderStatus
+                    ?->children($namespaces['cac-place-ext'])?->ValidNoticeInfo
+                    ?->children($namespaces['cac-place-ext'])?->AdditionalPublicationStatus
+                    ?->children($namespaces['cac-place-ext'])?->AdditionalPublicationDocumentReference
+                    ?->children($namespaces['cbc'])?->IssueDate;
 
                 //Forma de presentación de la oferta
                 // $fechapresentacion =  ;
 
 
                 //Fecha de presentación de ofertas
-                $fechaMaximaPresentacion = $entry->children($namespaces['cac-place-ext'])
-                    ?->ContractFolderStatus
-                    ?->children($namespaces['cac-place-ext'])
-                    ?->ValidNoticeInfo
-                    ?->children($namespaces['cac-place-ext'])
-                    ?->AdditionalPublicationStatus
-                    ?->children($namespaces['cac-place-ext'])
-                    ?->AdditionalPublicationDocumentReference
-                    ?->children($namespaces['cbc'])
-                    ?->LastResponseDate;
+                $fechaMaximaPresentacion = $entry
+                    ->children($namespaces['cac-place-ext'])?->ContractFolderStatus
+                    ?->children($namespaces['cac'])?->TenderingProcess
+                    ?->children($namespaces['cac'])?->TenderSubmissionDeadlinePeriod
+                    ?->children($namespaces['cbc'])?->EndDate;
                 //Fecha de presentación de solicitudes de participacion	
                 //Directiva de aplicación	
                 //Financiación Europea y fuente	
@@ -304,7 +295,7 @@ class AtonController extends Controller
                 $desarrollo = [72000000, 72100000];
                 $diseñoWeb = [72413000, 72413000, 72414000, 72415000, 72416000, 72417000, 72420000, 72421000, 72422000];
                 // uno todos los arrays que me interesan en uno solo llamado codigos usando la funcion array_merge
-                $codigos = array_merge($impresoras, $equipos, $desarrollo, $diseñoWeb);
+                $codigos = array_merge($impresoras, $equipos, $desarrollo, $perifericos, $diseñoWeb);
 
 
 
@@ -319,6 +310,7 @@ class AtonController extends Controller
                             'summary' => (string) $summary,
                             'fecha_actualizacion' => $fecha_update,
                             'fecha_puplicacion' => $fechaPuplicacion,
+                            'fecha_maxima_presentacion' => $fechaMaximaPresentacion,
                             'vigente_anulada_archivada' => "desconocido",
                             'estado' => (string) $estado,
                             'importe' => (string) $importe,
@@ -342,6 +334,7 @@ class AtonController extends Controller
                     $proyecto->summary = $proyec['summary'];
                     $proyecto->fecha_actualizacion = $proyec['fecha_actualizacion'];
                     $proyecto->fecha_publicacion  = $proyec['fecha_puplicacion'];
+                    $proyecto->fecha_presentacion = $proyec['fecha_maxima_presentacion'];
                     $proyecto->vigente_anulada_archivada = $proyec['vigente_anulada_archivada'];
                     $proyecto->estado = $proyec['estado'];
                     $proyecto->presupuesto_sin_impuestos = $proyec['importe'];
@@ -349,10 +342,15 @@ class AtonController extends Controller
                     $proyecto->objeto_contrato = $proyec['objeto_contrato'];
 
                     // Guardar el nuevo registro
+
+
                     $proyecto->save();
                     //esto es una marca que quiero que se vea en el equipo a 
+                } else {
+                    //actualizar registr
                 }
-                echo "el organo de contratacion :" . $proyecto->organo_contratacion . "La fecha de publicacion es:" . $proyecto->fecha_publicacion . "<br>";
+
+                //cho "la fecha es :" . $proyecto->fecha_presentacion . "<br>";
             }
 
             return view('dashboard', ['message' => 'Datos guardados correctamente']);

@@ -31,6 +31,7 @@
                                 <th scope="col">ID</th>
                                 <th scope="col">Organo de contratacion</th>
                                 <th scope="col">Fecha de publicacio</th>
+                                <th scope="col">Fecha de presentacion
                                 <th scope="col">Estado</th>
                                 <th scope="col">Lugar</th>
                                 <th scope="col">Plazo presentacion</th>
@@ -47,6 +48,7 @@
                                 <td>{{ $entry['id'] }}</td>
                                 <td>{{ $entry['organo_contratacion'] }}</td>
                                 <td>{{date('d-m-Y', strtotime($entry['fecha_publicacion']))}}</td>
+                                <td>{{date('d-m-Y', strtotime($entry['fecha_presentacion']))}}</td>
                                 <td>{{ $entry['estado'] }}</td>
                                 <td>{{ $entry['lugar_ejecucion'] }}</td>
                                 <td>{{date('d-m-Y', strtotime($entry['fecha_presentacion']))}}</td>
