@@ -13,9 +13,6 @@
                     </div>
                     @endif
 
-                    <h2>Proyectos</h2>
-
-
                     @if($proyectos->isEmpty())
                     <p>No hay proyectos disponibles.</p>
                     <br>
@@ -24,7 +21,10 @@
                     @else
 
 
-                    Ultima actualizacion:{{ $proyectos[0]->fecha_actualizacion }} <br>
+
+
+                    Ulitma actualizacion : {{date('d-m-Y', strtotime($ultimaActualizacion['updated_at']))}}<br>
+
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
@@ -34,7 +34,6 @@
                                 <th scope="col">Fecha de presentacion
                                 <th scope="col">Estado</th>
                                 <th scope="col">Lugar</th>
-                                <th scope="col">Plazo presentacion</th>
                                 <th scope="col">Objeto contrato</th>
                                 <th scope="col">Importe</th>
                                 <th scope="col">Acciones</th>
@@ -51,7 +50,6 @@
                                 <td>{{date('d-m-Y', strtotime($entry['fecha_presentacion']))}}</td>
                                 <td>{{ $entry['estado'] }}</td>
                                 <td>{{ $entry['lugar_ejecucion'] }}</td>
-                                <td>{{date('d-m-Y', strtotime($entry['fecha_presentacion']))}}</td>
                                 <td>{{ $entry['objeto_contrato'] }}</td>
                                 <td>{{ $entry['presupuesto_sin_impuestos']}}</td>
                                 <td>

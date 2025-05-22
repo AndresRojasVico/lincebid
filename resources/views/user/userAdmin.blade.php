@@ -10,7 +10,7 @@
                     Hola {{ Auth::user()->name }}, bienvenido a la zona de administrador de LinceBid. Aquí puedes gestionar los usuarios y las ofertas de la plataforma.
                     <br><br>
 
-                    <a href="https://www.hacienda.gob.es/es-ES/GobiernoAbierto/Datos%20Abiertos/Paginas/LicitacionesContratante.aspx">Ministerio de acienda</a>
+                    <a href="https://www.hacienda.gob.es/es-ES/GobiernoAbierto/Datos%20Abiertos/Paginas/LicitacionesContratante.aspx" target="_blank">Ministerio de acienda</a>
 
                     <br><br>
                     <!-- filepath: /resources/views/atom/upload.blade.php -->

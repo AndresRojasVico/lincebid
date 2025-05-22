@@ -181,7 +181,18 @@ class AtonController extends Controller
                 //Presupuesto base con impuestos	
                 //CPV	
                 //Tipo de contrato	
-                //Lugar de ejecución	
+                //Lugar de ejecución
+                $lugarEjecucion = $entry
+                    ->children($namespaces['cac-place-ext'])->ContractFolderStatus
+                    ->children($namespaces['cac-place-ext'])->LocatedContractingParty
+                    ->children($namespaces['cac'])->Party
+                    ->children($namespaces['cac'])->PostalAddress
+                    ->children($namespaces['cbc'])->CityName;
+
+
+
+
+
                 //Órgano de Contratación	
                 $organoContratacion = $entry
                     ->children($namespaces['cac-place-ext'])->ContractFolderStatus
@@ -316,6 +327,7 @@ class AtonController extends Controller
                             'importe' => (string) $importe,
                             'organo_contratacion' => (string) $organoContratacion,
                             'objeto_contrato' => (string) $objetoContrato,
+                            'lugar_ejecucion' => (string) $lugarEjecucion,
                         ];
                     }
                 }
@@ -340,6 +352,7 @@ class AtonController extends Controller
                     $proyecto->presupuesto_sin_impuestos = $proyec['importe'];
                     $proyecto->organo_contratacion = $proyec['organo_contratacion'];
                     $proyecto->objeto_contrato = $proyec['objeto_contrato'];
+                    $proyecto->lugar_ejecucion = $proyec['lugar_ejecucion'];
 
                     // Guardar el nuevo registro
 
@@ -347,12 +360,24 @@ class AtonController extends Controller
                     $proyecto->save();
                     //esto es una marca que quiero que se vea en el equipo a 
                 } else {
-                    //actualizar registr
+                    // Si el registro ya existe, actualízalo
+                    echo "el proyecto con id : " . $proyectoExistente->id . "se ha actualizado  <br>";
+                    $proyectoExistente->link_licitacion = $proyec['link'];
+                    $proyectoExistente->summary = $proyec['summary'];
+                    $proyectoExistente->fecha_actualizacion = $proyec['fecha_actualizacion'];
+                    $proyectoExistente->fecha_publicacion  = $proyec['fecha_puplicacion'];
+                    $proyectoExistente->fecha_presentacion = $proyec['fecha_maxima_presentacion'];
+                    $proyectoExistente->vigente_anulada_archivada = $proyec['vigente_anulada_archivada'];
+                    $proyectoExistente->estado = $proyec['estado'];
+                    $proyectoExistente->presupuesto_sin_impuestos = $proyec['importe'];
+                    $proyectoExistente->organo_contratacion = $proyec['organo_contratacion'];
+                    $proyectoExistente->objeto_contrato = $proyec['objeto_contrato'];
+                    $proyectoExistente->lugar_ejecucion = $proyec['lugar_ejecucion'];
+
+                    // Guardar los cambios
+                    $proyectoExistente->save();
                 }
-
-                //cho "la fecha es :" . $proyecto->fecha_presentacion . "<br>";
             }
-
             return view('dashboard', ['message' => 'Datos guardados correctamente']);
         } else { // end comprobar si existe el archivo
             return response()->json(['message' => 'Archivo no encontrado'], 404);

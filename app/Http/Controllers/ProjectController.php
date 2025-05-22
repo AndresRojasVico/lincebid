@@ -16,7 +16,11 @@ class ProjectController extends Controller
             ->orderBy('fecha_publicacion', 'desc')
             ->get();
 
-        return view('proyectos.index', ['proyectos' => $proyectos]);
+        $ultimaActualizacion = Proyecto::orderBy('updated_at', 'desc')
+            ->first();
+
+
+        return view('proyectos.index', ['proyectos' => $proyectos], ['ultimaActualizacion' => $ultimaActualizacion]);
     }
 
     public function show(Request $request)
