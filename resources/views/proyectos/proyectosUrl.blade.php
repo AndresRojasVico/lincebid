@@ -26,6 +26,7 @@
                                 <th scope="col">Titulo</th>
                                 <th scope="col">ContractFolderStatus</th>
                                 <th scope="col">Importe</th>
+                                <th scope="col">Fecha de publicacion</th>
                                 <th scope="col">Codigos</th>
                                 <th scope="col">Acciones</th>
 
@@ -36,9 +37,10 @@
                             <tr>
                                 <td>{{$entry['contador']}}</td>
                                 <td>{{ $entry['summary'] }}</td>
-                                <td><a href="{{ $entry['link'] }}">{{ $entry['title'] }}</a></td>
+                                <td><a href="{{ $entry['link'] }}" target="_blank">{{ $entry['title'] }}</a></td>
                                 <td> {{$entry['ContractFolderID']}}</td>
                                 <td> {{$entry['importe']}}€</td>
+                                <td> {{$entry['fecha_publicacion']}}</td>
                                 <td>
                                     @foreach($entry['codigos'] as $codigo)
                                     {{$codigo}}
@@ -46,7 +48,7 @@
 
                                 </td>
                                 <td>
-                                    <a href=" {{ route('proyectoUrl',['data'=>$entry['summary']]) }}">Ver</a>
+                                    <a href=" {{ route('proyectoUrl',['data'=>$entry['link']]) }}">Ver</a>
 
                                 </td>
                             </tr>

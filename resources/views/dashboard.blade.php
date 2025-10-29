@@ -15,7 +15,7 @@
                     </div>
                     @endif
 
-                    <h3>hola {{ Auth::user()->name }}</h3>
+                    <h3>Hola {{ Auth::user()->name }}</h3>
 
                     @if (Auth::user()->isAdmin())
                     <a href="{{ route('user.admin') }}">Zona de administrador</a>
@@ -26,11 +26,6 @@
                     <a href="{{ route('proyectos.index') }}">Buscar proyectos nuevos</a>
                     <br>
                     <a href="{{ route ('proyectosUrl')}}">Proyecto desde url aton de hacienda</a>
-
-
-
-
-
                 </div>
             </div>
         </div>
