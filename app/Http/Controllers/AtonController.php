@@ -180,19 +180,47 @@ class AtonController extends Controller
                 //Presupuesto base sin impuestos	
                 //Presupuesto base con impuestos	
                 //CPV	
-                //Tipo de contrato	
-                //Lugar de ejecución
-                $lugarEjecucion = $entry
+                //Tipo de contrato
+
+                //Lugar de ejecución (ojo en agregadas no existe este nodo si ejecuto esto de error )
+
+               /* $lugarEjecucion = $entry
                     ->children($namespaces['cac-place-ext'])->ContractFolderStatus
                     ->children($namespaces['cac-place-ext'])->LocatedContractingParty
                     ->children($namespaces['cac'])->Party
                     ->children($namespaces['cac'])->PostalAddress
                     ->children($namespaces['cbc'])->CityName;
+                */
 
 
+                 
+                // Lugar de ejecución (Implementación Segura con XPath)
+                $lugarEjecucion = "dato no disponible"; // Valor por defecto
 
+                // 1. Registrar los namespaces necesarios para que XPath funcione.
+                // Asumo que el array $namespaces ya contiene los URIs correctos.
+                // Es crucial que estos prefijos (cac-place-ext, cac, cbc) se registren con sus URIs.
+                $entry->registerXPathNamespace('cac-place-ext', $namespaces['cac-place-ext']);
+                $entry->registerXPathNamespace('cac', $namespaces['cac']);
+                $entry->registerXPathNamespace('cbc', $namespaces['cbc']);
 
+                 // 2. Definir la consulta XPath para la ruta completa.
+                 // El punto inicial (./) indica que la búsqueda comienza desde el nodo actual ($entry).
+                $xpath_query = './cac-place-ext:ContractFolderStatus/cac-place-ext:LocatedContractingParty/cac:Party/cac:PostalAddress/cbc:CityName';
 
+                 // 3. Ejecutar la consulta. Devuelve un array de objetos SimpleXMLElement (estará vacío si el nodo no existe).
+                $nodos_encontrados = $entry->xpath($xpath_query);
+
+                 // 4. Verificar el resultado.
+                 if (!empty($nodos_encontrados)) {
+                  // Si el array no está vacío, el nodo existe. Obtenemos el valor del primer resultado.
+                  $lugarEjecucion = (string) $nodos_encontrados[0];
+                  }
+
+                // Al final, $lugarEjecucion contiene el valor o "dato no disponible"
+                 
+                    
+                   
                 //Órgano de Contratación	
                 $organoContratacion = $entry
                     ->children($namespaces['cac-place-ext'])->ContractFolderStatus
@@ -247,6 +275,7 @@ class AtonController extends Controller
 
 
                 foreach ($codes as $code) {
+                    
 
                     //filtrado  de codigos con el array codigos
                     if (in_array($code, $codigos)) {

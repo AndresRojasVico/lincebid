@@ -11,7 +11,8 @@
                     <br><br>
 
                     <a href="https://www.hacienda.gob.es/es-ES/GobiernoAbierto/Datos%20Abiertos/Paginas/LicitacionesContratante.aspx" target="_blank">Ministerio de acienda</a>
-
+                    <br>
+                    <a href="https://www.hacienda.gob.es/es-ES/GobiernoAbierto/Datos%20Abiertos/Paginas/licitaciones_plataforma_contratacion.aspx">Todos los enlaces contratos menores y mayores  </a> 
                     <br><br>
                     <!-- filepath: /resources/views/atom/upload.blade.php -->
                     <form action="{{ route('user.upload.post') }}" method="POST" enctype="multipart/form-data">
