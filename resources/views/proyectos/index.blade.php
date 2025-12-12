@@ -25,41 +25,46 @@
 
                     Ulitma actualizacion : {{date('d-m-Y', strtotime($ultimaActualizacion['updated_at']))}}<br>
 
-                    <table class="table table-striped table-hover">
+                   <table class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th scope="col">ID</th>
+                                <th scope="col" class="columna-id-estrecha">...ID</th> 
                                 <th scope="col">Organo de contratacion</th>
-                                <th scope="col">Fecha de publicacio</th>
-                                <th scope="col">Fecha de presentacion
-                                <th scope="col">Estado</th>
+                                <th scope="col">Fecha de presentacion</th>
                                 <th scope="col">Lugar</th>
                                 <th scope="col">Objeto contrato</th>
                                 <th scope="col">Importe</th>
                                 <th scope="col">Acciones</th>
-
-
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($proyectos as $entry)
-                            <tr>
-                                <td>{{ $entry['id'] }}</td>
+                             @foreach($proyectos as $entry)
+                              <tr>
+                                <td>{{ substr($entry['id'], -4) }}</td>
                                 <td>{{ $entry['organo_contratacion'] }}</td>
-                                <td>{{date('d-m-Y', strtotime($entry['fecha_publicacion']))}}</td>
                                 <td>{{date('d-m-Y', strtotime($entry['fecha_presentacion']))}}</td>
-                                <td>{{ $entry['estado'] }}</td>
                                 <td>{{ $entry['lugar_ejecucion'] }}</td>
-                                <td>{{ $entry['objeto_contrato'] }}</td>
-                                <td>{{ $entry['presupuesto_sin_impuestos']}}</td>
                                 <td>
-                                    <a href="{{ route('proyecto.detalle') }}?id={{ urlencode($entry['id']) }}" class="btn btn-warning">Ver</a>
+                                    @php
+                                        $objeto_contrato = $entry['objeto_contrato'];
+                                        $limite = 100;
+                                        $texto_limitado = $objeto_contrato;
 
+                                        // Comprobar si el texto es más largo que 50 caracteres
+                                        if (strlen($objeto_contrato) > $limite) {
+                                            // Tomar los primeros 50 caracteres y añadir '...'
+                                            $texto_limitado = substr($objeto_contrato, 0, $limite) . '...';
+                                        }
+                                    @endphp
+                                    {{ $texto_limitado }}
                                 </td>
-                            </tr>
-
-
-                            @endforeach
+                                <td>{{ $entry['presupuesto_sin_impuestos']}}</td>
+                                <td> 
+                                    <a href="{{ route('proyecto.detalle') }}?id={{ urlencode($entry['id']) }}" class="btn btn-warning">Ver</a>
+                                    <a href="{{ route('proyecto.delete')  }}?id={{ urlencode($entry['id']) }}" class="btn btn-danger">Eliminar</a>
+                                    
+                                </tr>
+                              @endforeach
                         </tbody>
                     </table>
 

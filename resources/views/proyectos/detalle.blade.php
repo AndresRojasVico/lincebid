@@ -18,6 +18,7 @@
                     <p>Fecha de publicacion: {{ date('d-m-Y', strtotime($proyecto['fecha_publicacion'])) }}</p>
                     <br>
                     <a href=" {{ route ('proyecto_usuario.new') }}?id={{ urlencode($proyecto['id']) }} " class="btn btn-warning"> Iniciar proyecto nuevo</a>
+                    <a href=" {{route ('proyectos.index')}}" class= "btn btn-warning">Volver al listado</a>
 
                     @endif
                 </div>

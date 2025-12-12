@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Proyecto;
+use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
 {
@@ -13,7 +14,7 @@ class ProjectController extends Controller
 
 
         $proyectos = Proyecto::where('estado', 'EN PLAZO')
-            ->orderBy('fecha_publicacion', 'desc')
+            ->orderBy('fecha_presentacion', 'desc')
             ->get();
 
         $ultimaActualizacion = Proyecto::orderBy('updated_at', 'desc')
@@ -28,5 +29,16 @@ class ProjectController extends Controller
         $id = urldecode($request->query('id'));
         $proyecto = Proyecto::findOrFail($id);
         return view('proyectos.detalle', compact('proyecto'));
+    }
+
+    public function delete(Request $request)
+    {
+        
+        $id = urldecode($request->query('id'));
+       
+      
+        DB::table('proyectos')->where('id', '=', $id)->delete();
+       
+        return redirect()->route('proyectos.index')->with('status', 'Proyecto eliminado correctamente.');
     }
 }

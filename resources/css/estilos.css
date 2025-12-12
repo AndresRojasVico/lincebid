@@ -1,3 +1,21 @@
 .tex_rojo{
-    color: red;
+    color: rgb(233, 3, 3);
 }
+
+
+.columna-id {
+    width: 150px; /* Puedes ajustarlo a 7%, 80px, etc. */
+}
+
+
+.columna-truncada {
+    /* 1. Define el ancho de la columna (ej. 150px) */
+    width: 150px; 
+    /* 2. Asegura que el contenido extra se oculta */
+    overflow: hidden;
+    /* 3. Evita que el texto se ajuste a la siguiente línea */
+    white-space: nowrap;
+    /* 4. Muestra puntos suspensivos (...) donde se corta el texto */
+    text-overflow: ellipsis;
+}
+
