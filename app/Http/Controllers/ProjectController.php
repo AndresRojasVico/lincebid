@@ -14,7 +14,7 @@ class ProjectController extends Controller
 
 
         $proyectos = Proyecto::where('estado', 'EN PLAZO')
-            ->orderBy('fecha_presentacion', 'desc')
+            ->orderBy('fecha_presentacion', 'asc')
             ->get();
 
         $ultimaActualizacion = Proyecto::orderBy('updated_at', 'desc')
@@ -33,12 +33,12 @@ class ProjectController extends Controller
 
     public function delete(Request $request)
     {
-        
+
         $id = urldecode($request->query('id'));
-       
-      
+
+
         DB::table('proyectos')->where('id', '=', $id)->delete();
-       
+
         return redirect()->route('proyectos.index')->with('status', 'Proyecto eliminado correctamente.');
     }
 }
