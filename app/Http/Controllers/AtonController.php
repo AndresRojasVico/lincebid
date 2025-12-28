@@ -43,14 +43,13 @@ class AtonController extends Controller
             $co = $entry->children($namespaces['cac-place-ext'])->ContractFolderStatus->children($namespaces['cac'])->ProcurementProject->children($namespaces['cac'])->RequiredCommodityClassification;
             foreach ($co as $code) {
                 $codes[] = (string) $code->children($namespaces['cbc'])->ItemClassificationCode;
-            
             }
             $fechaPublucacion = $entry
-                    ->children($namespaces['cac-place-ext'])?->ContractFolderStatus
-                    ?->children($namespaces['cac-place-ext'])?->ValidNoticeInfo
-                    ?->children($namespaces['cac-place-ext'])?->AdditionalPublicationStatus
-                    ?->children($namespaces['cac-place-ext'])?->AdditionalPublicationDocumentReference
-                    ?->children($namespaces['cbc'])?->IssueDate;
+                ->children($namespaces['cac-place-ext'])?->ContractFolderStatus
+                ?->children($namespaces['cac-place-ext'])?->ValidNoticeInfo
+                ?->children($namespaces['cac-place-ext'])?->AdditionalPublicationStatus
+                ?->children($namespaces['cac-place-ext'])?->AdditionalPublicationDocumentReference
+                ?->children($namespaces['cbc'])?->IssueDate;
 
             //filtrar por codigos 
             $codigos = [30000000, 30100000, 30120000, 30121100, 30123000, 30123100, 30140000, 30141000, 30141100, 30141200, 30141300, 30150000, 30151000, 30170000, 30172000, 30190000, 30191000, 30191400, 30192000, 30192100, 30192200, 30192300, 30192400, 30192500, 30192600, 30192700, 30192800, 30192900, 30193000, 30193100, 30193200, 30197000, 30197100, 30197200, 30197300, 30197400, 30197500, 30197600, 30199000, 30199100, 30199200, 30199300, 30199400, 30199500, 30199600, 30199700, 30200000, 30210000, 30211000, 30211100, 30211200, 30211300, 30211400, 30211500, 30212000, 30212100, 30213000, 30213100, 30213200, 30213300, 30213400, 30213500, 30214000, 30215000, 30215100, 30216000, 30216100, 30230000, 30231000, 30231100, 30231200, 30231300, 30232000, 30232100, 30233000, 30233100, 30233300, 30234000, 30234100, 30234200, 30234300, 30234400, 30234500, 30234600, 30234700, 30236000, 30236100, 30236200, 30237000, 30237100, 30237200, 30237300, 30237400, 32000000, 32200000, 32250000, 32251000, 32251100, 32252000, 32252100, 32300000, 32320000, 32340000, 32341000, 32342000, 32342100, 32342200, 32342300, 32400000, 32410000, 32420000, 32421000, 32422000, 32423000, 32424000, 48000000, 51000000, 51600000, 51610000, 51611000, 51611100, 51612000, 72000000, 72100000, 72200000, 72400000, 72500000, 72600000, 72700000, 72900000];
@@ -184,7 +183,7 @@ class AtonController extends Controller
 
                 //Lugar de ejecución (ojo en agregadas no existe este nodo si ejecuto esto de error )
 
-               /* $lugarEjecucion = $entry
+                /* $lugarEjecucion = $entry
                     ->children($namespaces['cac-place-ext'])->ContractFolderStatus
                     ->children($namespaces['cac-place-ext'])->LocatedContractingParty
                     ->children($namespaces['cac'])->Party
@@ -193,7 +192,7 @@ class AtonController extends Controller
                 */
 
 
-                 
+
                 // Lugar de ejecución (Implementación Segura con XPath)
                 $lugarEjecucion = "dato no disponible"; // Valor por defecto
 
@@ -204,23 +203,23 @@ class AtonController extends Controller
                 $entry->registerXPathNamespace('cac', $namespaces['cac']);
                 $entry->registerXPathNamespace('cbc', $namespaces['cbc']);
 
-                 // 2. Definir la consulta XPath para la ruta completa.
-                 // El punto inicial (./) indica que la búsqueda comienza desde el nodo actual ($entry).
+                // 2. Definir la consulta XPath para la ruta completa.
+                // El punto inicial (./) indica que la búsqueda comienza desde el nodo actual ($entry).
                 $xpath_query = './cac-place-ext:ContractFolderStatus/cac-place-ext:LocatedContractingParty/cac:Party/cac:PostalAddress/cbc:CityName';
 
-                 // 3. Ejecutar la consulta. Devuelve un array de objetos SimpleXMLElement (estará vacío si el nodo no existe).
+                // 3. Ejecutar la consulta. Devuelve un array de objetos SimpleXMLElement (estará vacío si el nodo no existe).
                 $nodos_encontrados = $entry->xpath($xpath_query);
 
-                 // 4. Verificar el resultado.
-                 if (!empty($nodos_encontrados)) {
-                  // Si el array no está vacío, el nodo existe. Obtenemos el valor del primer resultado.
-                  $lugarEjecucion = (string) $nodos_encontrados[0];
-                  }
+                // 4. Verificar el resultado.
+                if (!empty($nodos_encontrados)) {
+                    // Si el array no está vacío, el nodo existe. Obtenemos el valor del primer resultado.
+                    $lugarEjecucion = (string) $nodos_encontrados[0];
+                }
 
                 // Al final, $lugarEjecucion contiene el valor o "dato no disponible"
-                 
-                    
-                   
+
+
+
                 //Órgano de Contratación	
                 $organoContratacion = $entry
                     ->children($namespaces['cac-place-ext'])->ContractFolderStatus
@@ -270,17 +269,17 @@ class AtonController extends Controller
                 foreach ($co as $code) {
                     $codes[] = (string) $code->children($namespaces['cbc'])->ItemClassificationCode;
                 }
-                  //Array de los codigos por los que quiero filtrar estes codigos son los de obras y servicios relacionados con la informatica
+                //Array de los codigos por los que quiero filtrar estes codigos son los de obras y servicios relacionados con la informatica
                 $codigos = [30000000, 30100000, 30120000, 30121100, 30123000, 30123100, 30140000, 30141000, 30141100, 30141200, 30141300, 30150000, 30151000, 30170000, 30172000, 30190000, 30191000, 30191400, 30192000, 30192100, 30192200, 30192300, 30192400, 30192500, 30192600, 30192700, 30192800, 30192900, 30193000, 30193100, 30193200, 30197000, 30197100, 30197200, 30197300, 30197400, 30197500, 30197600, 30199000, 30199100, 30199200, 30199300, 30199400, 30199500, 30199600, 30199700, 30200000, 30210000, 30211000, 30211100, 30211200, 30211300, 30211400, 30211500, 30212000, 30212100, 30213000, 30213100, 30213200, 30213300, 30213400, 30213500, 30214000, 30215000, 30215100, 30216000, 30216100, 30230000, 30231000, 30231100, 30231200, 30231300, 30232000, 30232100, 30233000, 30233100, 30233300, 30234000, 30234100, 30234200, 30234300, 30234400, 30234500, 30234600, 30234700, 30236000, 30236100, 30236200, 30237000, 30237100, 30237200, 30237300, 30237400, 32000000, 32200000, 32250000, 32251000, 32251100, 32252000, 32252100, 32300000, 32320000, 32340000, 32341000, 32342000, 32342100, 32342200, 32342300, 32400000, 32410000, 32420000, 32421000, 32422000, 32423000, 32424000, 48000000, 51000000, 51600000, 51610000, 51611000, 51611100, 51612000, 72000000, 72100000, 72200000, 72400000, 72500000, 72600000, 72700000, 72900000];
 
 
                 foreach ($codes as $code) {
-                    
+
 
                     //filtrado  de codigos con el array codigos
                     if (in_array($code, $codigos)) {
                         $data[] = [
-                            'id' => (string) $contractFolderID,
+                            'expediente' => (string) $contractFolderID,
                             'link' => (string) $link,
                             'summary' => (string) $summary,
                             'fecha_actualizacion' => $fecha_update,
@@ -300,12 +299,12 @@ class AtonController extends Controller
             $proyecto = new Proyecto();
             foreach ($data as $proyec) {
                 // Verificar si el registro ya existe en la base de datos
-                $proyectoExistente = Proyecto::find($proyec['id']); // Busca por la clave primaria (id)
+                $proyectoExistente = Proyecto::find($proyec['expediente']); // Busca por la clave primaria (id)
 
                 if (!$proyectoExistente) {
                     // Si no existe, crea un nuevo registro
                     $proyecto = new Proyecto();
-                    $proyecto->id = $proyec['id'];
+                    $proyecto->expediente = $proyec['expediente'];
                     $proyecto->link_licitacion = $proyec['link'];
                     $proyecto->summary = $proyec['summary'];
                     $proyecto->fecha_actualizacion = $proyec['fecha_actualizacion'];
@@ -321,7 +320,6 @@ class AtonController extends Controller
                     // Guardar el nuevo registro
                     // echo "el proyecto con id : " . $proyecto->id . " se ha creado  <br>";
                     $proyecto->save();
-                     
                 } else {
                     // Si el registro ya existe, actualízalo
                     echo "el proyecto con id : " . $proyectoExistente->id . "se ha actualizado  <br>";

@@ -28,7 +28,7 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th scope="col" class="columna-id-estrecha">...ID</th>
+                                <th scope="col" class="columna-id-estrecha">Expediente</th>
                                 <th scope="col">Organo de contratacion</th>
                                 <th scope="col">Fecha de presentacion</th>
                                 <th scope="col">Lugar</th>
@@ -40,7 +40,7 @@
                         <tbody>
                             @foreach($proyectos as $entry)
                             <tr>
-                                <td>{{ substr($entry['id'], -4) }}</td>
+                                <td>{{$entry['expediente']}}</td>
                                 <td>{{ $entry['organo_contratacion'] }}</td>
                                 <td>{{date('d-m-Y', strtotime($entry['fecha_presentacion']))}}</td>
                                 <td>{{ $entry['lugar_ejecucion'] }}</td>
