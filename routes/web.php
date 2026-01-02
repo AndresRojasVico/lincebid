@@ -46,13 +46,8 @@ Route::get('/proyectoUrl/{data}', function ($data) {
 
 //Route::get('/proyecto_usuario/index', [ProyectoUsuarioController::class, 'index'])->name('proyecto_usuario.index');
 Route::get('/proyecto_usuario/index/{data?}', [ProyectoUsuarioController::class, 'index'])->middleware('auth')->name('proyecto_usuario.index');
-
 Route::get('/proyecto_usuario/{id?}', [ProyectoUsuarioController::class, 'newProyecto'])->name('proyecto_usuario.new');
-
 Route::post('/aton/upload', [AtonController::class, 'upload'])->name('user.upload.post');
-
-
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
