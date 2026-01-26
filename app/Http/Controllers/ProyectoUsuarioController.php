@@ -23,7 +23,10 @@ class ProyectoUsuarioController extends Controller
     public function newProyecto(Request $request)
     {
         $id = urldecode($request->query('id'));
+        // Buscar el proyecto por su ID
         $proyecto = Proyecto::find($id);
+
+        //verificar si el proyecto existe
         if (!$proyecto) {
             return redirect()->route('proyectos.index')->with('error', 'Proyecto no encontrado');
         }

@@ -15,7 +15,6 @@ class ProjectController extends Controller
     public function index()
     {
 
-
         $proyectos = Proyecto::where('estado', 'EN PLAZO')
             ->orderBy('fecha_presentacion', 'asc')
             ->get();
@@ -31,25 +30,15 @@ class ProjectController extends Controller
     {
         $id = urldecode($request->query('id'));
         $proyecto = Proyecto::findOrFail($id);
-        $todos_proyectos = Proyecto_usuario::all();
-        foreach ($todos_proyectos as $proyecto_usuario) {
-            echo "Proyecto Usuario ID: " . $proyecto_usuario->id . "<br>";
-            echo "Proyecto iniciado por : " . $proyecto_usuario->usuario->name . "<br>";
-            echo "<hr>";
-        }
-        echo "<hr>";
-        echo "<br>";
-        $proyectos_usuario = auth()->user()->proyectos_usuarios;
-        foreach ($proyectos_usuario as $proyecto_usuario) {
-            echo "el usuario actual que es :" . auth()->user()->name . " tiene este proyecto iniciado " . $proyecto_usuario->id . "<br>";
-            echo "<hr>";
-        }
+
 
         return view('proyectos.detalle', compact('proyecto'));
     }
 
     public function delete(Request $request)
     {
+        echo "Eliminar proyecto"; // Línea de depuración
+        die(); // Detener la ejecución para verificar la salida 
 
         $id = urldecode($request->query('id'));
 

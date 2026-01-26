@@ -72,4 +72,11 @@ class User extends Authenticatable
     {
         return $this->rol === 'admin';
     }
+
+
+    // En User.php
+    public function tieneProyecto($proyectoId)
+    {
+        return $this->proyectos_usuarios->contains('proyecto_id', $proyectoId);
+    }
 }
