@@ -7,12 +7,14 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    @if (session('status'))
-                    <div class="alert alert-success">
-                        {{ session('status') }}
-                    </div>
-                    @endif
 
+                    <!--  uso de componente alert-->
+                    @if (session('status'))
+                    {{-- Ejemplo usando el $slot para contenido adicional --}}
+                    <x-alert type="success" message="{{ session('status') }}.">
+
+                    </x-alert>
+                    @endif
                     @if($proyectos->isEmpty())
                     <p>No hay proyectos disponibles.</p>
                     <br>

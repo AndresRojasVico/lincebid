@@ -10,10 +10,18 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <!-- Contenido del componente de prueba -->
-                    <h2>esto son purevas de componentes</h2>
+                    <h2>esto son pruebas de componentes</h2>
+                    <x-card>
+                        Este es el contenido del slot del componente Card.
+                    </x-card>
                     <x-danger-button>
                         Botón de Peligro
                     </x-danger-button>
+                    <x-secondary-button>
+                        Botón Secundario
+                    </x-secondary-button>
+
+
                 </div>
             </div>
         </div>
