@@ -14,8 +14,13 @@ class ProyectoUsuarioController extends Controller
     //
 
 
+    public function dashboard(){
+     $misProyectos = Proyecto_usuario::where('usuario_id', auth()->user()->id)->get();
+     return view('dashboard',['misProyectos' => $misProyectos]);
+    }
     public function index()
     {
+       
         $misProyectos = Proyecto_usuario::where('usuario_id', auth()->user()->id)->get();
 
         return view('proyectosUsuarios.index', ['misProyectos' => $misProyectos]);
