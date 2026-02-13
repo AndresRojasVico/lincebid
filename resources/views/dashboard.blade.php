@@ -4,19 +4,24 @@
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
+    {{-- modulo maquetado --}}
+
+    {{-- fin de modulo maquetado--}}
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex ">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            @if(isset($message))
+                <div class="alert alert-success">
+                    {{ $message }}
+                </div>
+            @endif
+
             {{-- BLOQUE DE INFORMACION DEL USUSARO --}}
-            <div class="max-w-xs bg-white overflow-hidden shadow-sm sm:rounded-lg m-3">
-                <div class="p-6 text-gray-900 flex flex-col items-center">
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class=" bg-white overflow-hidden shadow-sm sm:rounded-lg flex flex-col items-center p-6">
                     <img src="{{ route('user.image', ['filename' => Auth::user()->image]) }}"
                         class="rounded-full h-20 w-20  mx-auto" />
-                    @if(isset($message))
-                        <div class="alert alert-success">
-                            {{ $message }}
-                        </div>
-                    @endif
                     <h3 class="text-2xl text-red-600 font-bold">Hola {{ Auth::user()->name }}</h3>
                     @if (Auth::user()->isAdmin())
                         <a href="{{ route('user.admin') }}">Zona de administrador</a>
@@ -28,13 +33,19 @@
                     <br>
                     <a href="{{ route('proyectosUrl')}}">Proyecto desde url aton de hacienda</a>
                 </div>
-            </div>
-            <div class="max-w-xs bg-white overflow-hidden shadow-sm sm:rounded-lg m-3">
-                <div class="p-6 text-gray-900 flex flex-col items-center">
+                <div class="col-span-2 bg-white overflow-hidden shadow-sm sm:rounded-lg text-gray-900 p-6">
+                    buscar proyectos en los que estoy participando
+                </div>
+                <div class=" bg-white overflow-hidden shadow-sm sm:rounded-lg text-gray-900 p-6">
+                    buscar proyectos en los que estoy participando
+                </div>
+                <div class=" bg-white overflow-hidden shadow-sm sm:rounded-lg text-gray-900 p-6">
+                    buscar proyectos en los que estoy participando
+                </div>
+                <div class=" bg-white overflow-hidden shadow-sm sm:rounded-lg text-gray-900 p-6">
                     buscar proyectos en los que estoy participando
                 </div>
             </div>
-
 
         </div>
     </div>
